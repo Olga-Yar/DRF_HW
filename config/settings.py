@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'study',
+        'NAME': 'study_project',
         'USER': 'postgres',
         'PASSWORD': os.getenv('DATABASES_password')
     }
@@ -148,11 +148,11 @@ EMAIL_USE_SSL = True
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = 'yarosholha@yandex.ru'
-
-CACHES_ENABLE = os.getenv('CACHE_ENABLED') == '1'
-CACHES = {
-    "default": {
-        "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": os.getenv('CACHE_LOCATION'),
-    }
-}
+#
+# CACHES_ENABLE = os.getenv('CACHE_ENABLED') == '1'
+# CACHES = {
+#     "default": {
+#         "BACKEND": "django.core.cache.backends.redis.RedisCache",
+#         "LOCATION": os.getenv('CACHE_LOCATION'),
+#     }
+# }
