@@ -1,8 +1,11 @@
 from django.urls import path
 from rest_framework import routers
 
-from views.lesson import *
-from views.course import *
+from study.apps import StudyConfig
+from study.views.lesson import LessonListView, LessonDetailView, LessonDeleteView, LessonUpdateView, LessonCreateView
+from study.views.course import *
+
+app_name = StudyConfig.name
 
 urlpatterns = [
     path('lesson/', LessonListView.as_view(), name='lesson_list'),

@@ -9,7 +9,7 @@ class Lesson(models.Model):
     about = models.TextField(verbose_name='описание', **NULLABLE)
     url = models.URLField(verbose_name='ссылка на видео', **NULLABLE)
 
-    course = models.ManyToManyField('Course', verbose_name='курс', **NULLABLE)
+    course = models.ForeignKey('Course', on_delete=models.CASCADE, **NULLABLE)
 
     def __str__(self):
         return f'{self.name}: {self.about}'

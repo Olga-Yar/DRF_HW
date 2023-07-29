@@ -1,16 +1,24 @@
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path
-from django.views.decorators.cache import cache_page
 
-from study.apps import StudyConfig
+from django.views.generic import TemplateView
+from users.apps import UsersConfig
+from users.views import RegisterView, ProfileView, ConfirmView, generate_new_password
 
-app_name = StudyConfig.name
+app_name = UsersConfig.name
 
 urlpatterns = [
-    path('mailing/', MailingListView.as_view(), name='mailing_list'),  # список рассылок
-    path('mailing/<int:pk>/', MailingDetailView.as_view(), name='mailing_item'),
-    path('mailing/create/', MailingCreateView.as_view(), name='mailing_create'),
-    path('mailing/update/<int:pk>/', MailingUpdateView.as_view(), name='mailing_update'),
-    path('mailing/delete/<int:pk>/', MailingDeleteView.as_view(), name='mailing_delete'),
-]
+    path('', LoginView.as_view(template_name='users/login.html'), name='login'),
+
+    path('register/', RegisterView.as_view(), name='register'),
+    path('confirm_email/<key>/', ConfirmView.as_view(), name='confirm_email'),
+
+    path('invalid_verify/', TemplateView.as_view(template_name='users/invalid_verify.html'), name='invalid_verify'),
+
+    path('logout', LogoutView.as_view(), name='logout'),
+    path('profile/', ProfileView.as_view(), name='profile'),
+    path('profile/genpassword/', generate_new_password, name='generate_new_password'),
+
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
