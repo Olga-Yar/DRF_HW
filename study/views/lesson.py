@@ -1,30 +1,29 @@
 # для урока через дженерики
 from rest_framework.generics import RetrieveAPIView, DestroyAPIView, ListAPIView, UpdateAPIView, CreateAPIView
 
-from study.models import Lesson
-from study.seriallizers.lesson import LessonSerializer
+from study.seriallizers.lesson import LessonBaseSerializer, Lesson
 
 
-class LessonDetailView(RetrieveAPIView):
+class LessonBaseAPIView:
     queryset = Lesson.objects.all()
-    serializer_class = LessonSerializer
+    serializer_class = LessonBaseSerializer
 
 
-class LessonDeleteView(DestroyAPIView):
-    queryset = Lesson.objects.all()
-    serializer_class = LessonSerializer
+class LessonDetailView(LessonBaseAPIView, RetrieveAPIView):
+    pass
 
 
-class LessonListView(ListAPIView):
-    queryset = Lesson.objects.all()
-    serializer_class = LessonSerializer
+class LessonDeleteView(LessonBaseAPIView, DestroyAPIView):
+    pass
 
 
-class LessonUpdateView(UpdateAPIView):
-    queryset = Lesson.objects.all()
-    serializer_class = LessonSerializer
+class LessonListView(LessonBaseAPIView, ListAPIView):
+    pass
 
 
-class LessonCreateView(CreateAPIView):
-    queryset = Lesson.objects.all()
-    serializer_class = LessonSerializer
+class LessonUpdateView(LessonBaseAPIView, UpdateAPIView):
+    pass
+
+
+class LessonCreateView(LessonBaseAPIView, CreateAPIView):
+    pass
